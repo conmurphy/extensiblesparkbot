@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# See the following for example and further details 
+# https://github.com/mitchellh/vagrant-aws
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "dummy"
+
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = "YOUR KEY"
+    aws.secret_access_key = "YOUR SECRET KEY"
+    aws.region = "us-west-2"
+    aws.instance_type = "t2.micro"
+    aws.ami = "ami-6f68cf0f"
+    aws.associate_public_ip = "true"
+    aws.security_groups = "YOUR AWS SECURITY GROUP ID" 
+    aws.subnet_id = "YOUR AWS SUBNET ID"
+
+    aws.user_data = File.read("extensibleSparkBot-bootstrap.sh")
+
+    aws.keypair_name = "YOUR KEY PAIR NAME"
+    override.ssh.username = "ec2-user"
+    override.ssh.private_key_path = "KEYPAIR_NAME.pem"
+
+  end
+
+   config.vm.synced_folder ".", "/opt/extensiblesparkbot/", type: "rsync"
+
+end

@@ -1,0 +1,52 @@
+{
+    "config": {
+        "development": {
+            "worker": {
+                "token": "yourSparkToken",
+                "botEmail": "yourEmail@someAddress.com",
+                "admin": {
+                    "1": "admin1@domain.com",
+                    "2": "admin12@domain.com"
+                },
+                "restrictedRooms": {
+                    "1": "big room - listen only",
+                    "2": "another room",
+                    "3": "third room - lots of people"
+                },
+                "accessBehaviour":{
+                    "internalDomain": "myDomain.com",
+                    "removeExternal": "true"                    
+                },
+                "firstArgument": {
+                    "/myBot": {
+                        "commandReference": "commands.json",
+                        "requiresAdmin": "false",
+                        "allowExternal": "true" 
+                    },
+                    "/myBot-admin": {
+                        "commandReference": "commands-admin.json",
+                        "requiresAdmin": "true",
+                        "allowExternal": "false" 
+                    },
+                    "#conor": {
+                        "commandReference": "commands-sample.json",
+                        "requiresAdmin": "true",
+                        "allowExternal": "false" 
+                    }
+                },
+                "clustering": {
+                      "polling": {
+                        "interval":"3000",
+                        "roomID":"myRoomID"
+                    }
+                }
+            }
+
+        },
+        "production": {
+            "worker": {
+               
+            }
+        }
+    }
+}

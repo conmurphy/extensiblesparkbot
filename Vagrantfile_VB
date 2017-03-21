@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "app" do |app|
+    app.vm.box = "centos/7"
+ 	  app.vm.provision :shell, path: "extensibleSparkBot-bootstrap.sh"
+
+    app.vm.synced_folder ".", "/opt/extensiblesparkbot/"
+  end
+
+  config.vm.provider "virtualbox" do |v|
+ 	 v.memory = 1024
+  	v.cpus = 1
+  end
+
+end
